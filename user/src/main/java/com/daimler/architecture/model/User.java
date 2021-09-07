@@ -1,4 +1,4 @@
-package com.architecture.model;
+package com.daimler.architecture.model;
 
 import java.util.ArrayList;
 import java.util.List;
