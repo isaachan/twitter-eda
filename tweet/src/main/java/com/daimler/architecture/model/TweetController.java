@@ -7,11 +7,11 @@ public class TweetController {
 
     @PostMapping("/tweets/")
     public void postTweet(@RequestBody Tweet tweet) {
-
+        System.out.println("Post tweet " + tweet);
     }
 
     @DeleteMapping("/tweets/{id}")
     public void deleteTweet(@PathVariable long id) {
-
+        System.out.println("Delete tweet with id " + id);
     }
 }
