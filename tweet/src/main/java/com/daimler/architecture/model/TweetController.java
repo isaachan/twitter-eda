@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class TweetController {
 
     private static final String TWEETS_TOPIC = "tweets_topic";
-    
+
     @Autowired
     private KafkaProducer<String, String> kafkaProducer;
 

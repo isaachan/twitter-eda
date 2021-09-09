@@ -11,6 +11,11 @@ public class UserController {
 
     }
 
+    @PutMapping("/users/")
+    public void updateUser(@RequestBody User u) {
+
+    }
+
     @GetMapping("/users/{id}")
     public User findBy(@PathVariable("id") Long id) {
         return null;
