@@ -27,6 +27,8 @@ dependencies {
 
     implementation 'mysql:mysql-connector-java:8.0.21'
 
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
     testImplementation group:'org.apache.kafka', name:'kafka_2.13', version: '2.8.0', classifier:'test'
     testImplementation group:'org.apache.kafka', name:'kafka-streams', version:'2.8.0', classifier:'test'
     testImplementation group:'org.apache.kafka', name:'kafka-clients', version:'2.8.0', classifier:'test'

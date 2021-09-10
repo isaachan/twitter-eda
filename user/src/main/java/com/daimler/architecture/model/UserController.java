@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     private KafkaProducer<String, String> kafkaProducer;
 
-    private static final String USERS_TOPIC = "users_topic";
+    public static final String USERS_TOPIC = "users_topic";
 
     @PostMapping("/users/")
     public void newUser(@RequestBody User u) {
