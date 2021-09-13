@@ -30,6 +30,24 @@ public class UserController {
                 convertToJson(new UserTopicValue("update", u))));
     }
 
+    @PostMapping("/users/{id}/followers")
+    public void addFollower(@PathVariable Long me, @RequestBody User follower) {
+        kafkaProducer.send(new ProducerRecord<>(
+                USERS_TOPIC,
+                String.valueOf(me),
+                convertToJson(new UserTopicValue("add-follower", me, follower.getId()))
+        ));
+    }
+
+    @DeleteMapping("/users/{id}/followers/{followerId}")
+    public void deleteFollower(@PathVariable Long me, @PathVariable Long followerId) {
+        kafkaProducer.send(new ProducerRecord<>(
+                USERS_TOPIC,
+                String.valueOf(me),
+                convertToJson(new UserTopicValue("delete-follower", me, followerId))
+        ));
+    }
+
     @GetMapping("/users/{id}")
     public User findBy(@PathVariable("id") Long id) {
         return null;
