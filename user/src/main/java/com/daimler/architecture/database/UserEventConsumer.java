@@ -3,6 +3,7 @@ package com.daimler.architecture.database;
 import com.daimler.architecture.model.UserTopicValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,23 +26,7 @@ public class UserEventConsumer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         var consumer = new KafkaConsumer<String, String>(consumerConfig());
         var records = consumer.poll(Duration.ofMillis(20));
-        for (var record : records) {
-            var userTopicValue = convertFromJson(record.value());
-            switch(userTopicValue.getAction()) {
-                case "create":
-                    dbWriter.createUser(userTopicValue.getUser());
-                    break;
-                case "update":
-                    dbWriter.updateUser(userTopicValue.getUser());
-                    break;
-                case "add-follower":
-                    dbWriter.addFollower(userTopicValue.getTargetId(), userTopicValue.getFollowerId());
-                    break;
-                case "delete-follower":
-                    dbWriter.deleteFollower(userTopicValue.getTargetId(), userTopicValue.getFollowerId());
-                    break;
-            }
-        }
+        records.forEach(r -> persist(r));
     }
 
     private UserTopicValue convertFromJson(String record) {
@@ -49,6 +34,24 @@ public class UserEventConsumer implements CommandLineRunner {
             return new ObjectMapper().readValue(record, UserTopicValue.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void persist(ConsumerRecord<String, String>  record) {
+        var userTopicValue = convertFromJson(record.value());
+        switch(userTopicValue.getAction()) {
+            case "create":
+                dbWriter.createUser(userTopicValue.getUser());
+                break;
+            case "update":
+                dbWriter.updateUser(userTopicValue.getUser());
+                break;
+            case "add-follower":
+                dbWriter.addFollower(userTopicValue.getTargetId(), userTopicValue.getFollowerId());
+                break;
+            case "delete-follower":
+                dbWriter.deleteFollower(userTopicValue.getTargetId(), userTopicValue.getFollowerId());
+                break;
         }
     }
 
