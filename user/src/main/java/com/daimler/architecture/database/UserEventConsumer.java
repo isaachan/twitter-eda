@@ -1,10 +1,8 @@
 package com.daimler.architecture.database;
 
-import com.daimler.architecture.model.User;
 import com.daimler.architecture.model.UserTopicValue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +29,10 @@ public class UserEventConsumer implements CommandLineRunner {
             var userTopicValue = convertFromJson(record.value());
             switch(userTopicValue.getAction()) {
                 case "create":
-                    dbWriter.createUser(userTopicValue.getContent());
+                    dbWriter.createUser(userTopicValue.getUser());
                     break;
                 case "update":
-                    dbWriter.updateUser(userTopicValue.getContent());
+                    dbWriter.updateUser(userTopicValue.getUser());
                     break;
                 case "add-follower":
                     dbWriter.addFollower(userTopicValue.getTargetId(), userTopicValue.getFollowerId());
