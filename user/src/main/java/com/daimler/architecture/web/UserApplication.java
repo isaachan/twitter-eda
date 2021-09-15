@@ -1,4 +1,4 @@
-package com.daimler.architecture.model;
+package com.daimler.architecture.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

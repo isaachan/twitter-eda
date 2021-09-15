@@ -1,5 +1,6 @@
-package com.daimler.architecture.model;
+package com.daimler.architecture.web;
 
+import com.daimler.architecture.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;

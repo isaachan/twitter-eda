@@ -1,4 +1,6 @@
-package com.daimler.architecture.model;
+package com.daimler.architecture.web;
+
+import com.daimler.architecture.model.User;
 
 class UserTopicValue {
 
