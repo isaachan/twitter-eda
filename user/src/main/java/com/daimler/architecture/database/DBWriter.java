@@ -10,5 +10,5 @@ public class DBWriter {
 
     public void addFollower(Long target, Long follower) {}
 
-    public void removeFollower(Long target, Long follower) {}
+    public void deleteFollower(Long target, Long follower) {}
 }
