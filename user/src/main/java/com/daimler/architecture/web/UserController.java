@@ -16,6 +16,9 @@ public class UserController {
 
     public static final String USERS_TOPIC = "users_topic";
 
+    //curl -H 'Content-Type: application/json'
+    // -d'{"id":4,"name":"Mouse"}'
+    // -X POST http://localhost:8080/users/
     @PostMapping("/users/")
     public void newUser(@RequestBody User u) {
         kafkaProducer.send(new ProducerRecord<>(

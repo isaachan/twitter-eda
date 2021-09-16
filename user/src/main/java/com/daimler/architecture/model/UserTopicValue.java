@@ -8,6 +8,8 @@ public class UserTopicValue {
     private Long targetId;
     private Long followerId;
 
+    public UserTopicValue() {}
+
     public UserTopicValue(String action, User user) {
         this.action = action;
         this.user = user;

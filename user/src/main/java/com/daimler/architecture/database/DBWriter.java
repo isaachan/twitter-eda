@@ -13,13 +13,21 @@ public class DBWriter {
         this.connection = conn;
     }
 
-    public void createUser(User user) {}
+    public void createUser(User user) {
+        System.out.println("Create user: " + user.getName());
+    }
 
-    public void updateUser(User user) {}
+    public void updateUser(User user) {
+        System.out.println("Update user: " + user.getName());
+    }
 
-    public void addFollower(Long target, Long follower) {}
+    public void addFollower(Long target, Long follower) {
+        System.out.println(follower + " follows " + target);
+    }
 
-    public void deleteFollower(Long target, Long follower) {}
+    public void deleteFollower(Long target, Long follower) {
+        System.out.println(follower + " unfollows " + target);
+    }
 
     public void close() throws SQLException {
         connection.close();

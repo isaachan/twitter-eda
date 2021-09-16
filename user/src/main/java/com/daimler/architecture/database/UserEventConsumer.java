@@ -1,6 +1,7 @@
 package com.daimler.architecture.database;
 
 import com.daimler.architecture.model.UserTopicValue;
+import com.daimler.architecture.web.UserController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -9,24 +10,36 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Properties;
 
+@SpringBootApplication
 public class UserEventConsumer implements CommandLineRunner {
 
     @Autowired
     private DBWriter dbWriter;
 
     public static void main(String args[]) {
-        SpringApplication.run(UserEventConsumer.class, args);
+        SpringApplication app = new SpringApplication(UserEventConsumer.class);
+        app.setWebApplicationType(WebApplicationType.NONE); //<<<<<<<<<
+        app.run(args);
+
+//        SpringApplication.run(UserEventConsumer.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
         var consumer = new KafkaConsumer<String, String>(consumerConfig());
-        var records = consumer.poll(Duration.ofMillis(20));
-        records.forEach(r -> persist(r));
+        consumer.subscribe(Arrays.asList(UserController.USERS_TOPIC));
+
+        while (true) {
+            var records = consumer.poll(Duration.ofMillis(20));
+            records.forEach(r -> persist(r));
+        }
     }
 
     private UserTopicValue convertFromJson(String record) {
