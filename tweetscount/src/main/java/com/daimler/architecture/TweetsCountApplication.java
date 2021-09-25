@@ -26,7 +26,6 @@ public class TweetsCountApplication implements CommandLineRunner {
 
         builder
                 .stream(Pattern.compile(PATTERN_REGX), Consumed.with(Serdes.String(), Serdes.String()))
-                .mapValues(s -> Tweet.build(s))
-                .transformValues(() -> new TweetsCountTransformer(tweetCountStateStore), tweetCountStateStore);
+                .transform(() -> new TweetsCountTransformer(tweetCountStateStore), tweetCountStateStore);
     }
 }
