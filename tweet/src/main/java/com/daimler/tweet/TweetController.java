@@ -20,25 +20,25 @@ public class TweetController {
     @PostMapping("/tweets/")
     public void postTweet(@RequestBody Tweet tweet) {
         System.out.println("Post tweet " + tweet);
-        kafkaProducer.send(new ProducerRecord<>(TWEETS_TOPIC, String.valueOf(tweet.getId()), convertToJson(tweet)));
+        kafkaProducer.send(new ProducerRecord<>(TWEETS_TOPIC, String.valueOf(tweet.getSender()), convertToJson(tweet)));
     }
 
     @DeleteMapping("/tweets/{id}")
-    public void deleteTweet(@PathVariable long id) {
+    public void deleteTweet(@PathVariable long id, @RequestBody Tweet tweet) {
         System.out.println("Delete tweet with id " + id);
-        kafkaProducer.send(new ProducerRecord<>(TWEETS_TOPIC, String.valueOf(id), null));
+        kafkaProducer.send(new ProducerRecord<>(TWEETS_TOPIC, String.valueOf(tweet.getSender()), null));
     }
 
     @PostMapping("/retweets/")
     public void retweet(@RequestBody Retweet retweet) {
         System.out.println("retweet the tweet " + retweet.getOriginalId());
-        kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(retweet.getId()), convertToJson(retweet)));
+        kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(retweet.getSender()), convertToJson(retweet)));
     }
 
     @DeleteMapping("/retweets/{id}")
-    public void deleteRetweet(@PathVariable long id) {
+    public void deleteRetweet(@PathVariable long id, @RequestBody Retweet retweet) {
         System.out.println("delete retweet " + id);
-        kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(id), null));
+        kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(retweet.getSender()), null));
     }
 
     private String convertToJson(Object object) {
