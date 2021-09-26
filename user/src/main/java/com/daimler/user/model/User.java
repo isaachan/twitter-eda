@@ -1,4 +1,4 @@
-package com.daimler.architecture.model;
+package com.daimler.user.model;
 
 import java.util.ArrayList;
 import java.util.List;

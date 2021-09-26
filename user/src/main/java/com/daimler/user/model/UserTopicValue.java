@@ -1,4 +1,4 @@
-package com.daimler.architecture.model;
+package com.daimler.user.model;
 
 public class UserTopicValue {
 

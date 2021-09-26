@@ -1,6 +1,6 @@
-package com.daimler.architecture.database;
+package com.daimler.user.database;
 
-import com.daimler.architecture.model.User;
+import com.daimler.user.model.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;

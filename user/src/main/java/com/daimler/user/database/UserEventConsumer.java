@@ -1,7 +1,7 @@
-package com.daimler.architecture.database;
+package com.daimler.user.database;
 
-import com.daimler.architecture.model.UserTopicValue;
-import com.daimler.architecture.web.UserController;
+import com.daimler.user.model.UserTopicValue;
+import com.daimler.user.web.UserController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

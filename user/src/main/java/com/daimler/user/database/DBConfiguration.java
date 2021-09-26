@@ -1,13 +1,11 @@
-package com.daimler.architecture.database;
+package com.daimler.user.database;
 
-import org.apache.kafka.clients.producer.KafkaProducer;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @Configuration

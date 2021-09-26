@@ -1,6 +1,6 @@
 package com.daimler.architecture.model;
 
-import com.daimler.architecture.web.UserController;
+import com.daimler.user.web.UserController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

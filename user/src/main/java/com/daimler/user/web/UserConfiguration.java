@@ -1,4 +1,4 @@
-package com.daimler.architecture.web;
+package com.daimler.user.web;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
