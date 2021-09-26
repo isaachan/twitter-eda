@@ -1,2 +1,2 @@
-- [tweet] Refine Event Scheme to support significant semantic - create, update and delete.
+DONE - [tweet] Refine Event Scheme to support significant semantic - create and delete.
 DONE - [tweet] TweetEvent, userid as event key.
