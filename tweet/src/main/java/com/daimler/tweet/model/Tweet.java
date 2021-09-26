@@ -1,6 +1,6 @@
 package com.daimler.tweet.model;
 
-public class Tweet {
+public class Tweet implements WithSender {
 
     private long id;
     private String content;

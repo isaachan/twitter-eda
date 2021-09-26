@@ -1,6 +1,6 @@
 package com.daimler.tweet.model;
 
-public class Retweet {
+public class Retweet implements WithSender {
 
     private long id;
     private long originalId;
