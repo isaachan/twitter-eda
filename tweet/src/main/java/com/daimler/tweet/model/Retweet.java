@@ -1,4 +1,4 @@
-package com.daimler.architecture.model;
+package com.daimler.tweet.model;
 
 public class Retweet {
 

@@ -1,5 +1,7 @@
-package com.daimler.architecture.model;
+package com.daimler.tweet;
 
+import com.daimler.tweet.model.Retweet;
+import com.daimler.tweet.model.Tweet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
