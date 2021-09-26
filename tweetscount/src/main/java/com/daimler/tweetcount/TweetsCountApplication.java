@@ -1,6 +1,5 @@
-package com.daimler.architecture;
+package com.daimler.tweetcount;
 
-import com.daimler.architecture.model.Tweet;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.kstream.Consumed;
