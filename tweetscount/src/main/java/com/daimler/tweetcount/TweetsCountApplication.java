@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 public class TweetsCountApplication implements CommandLineRunner {
 
     static String PATTERN_REGX = "tweets_topic|retweets_topic";
+    public final static String TWEETS_COUNT = "tweets_count";
+
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TweetsCountApplication.class);
         app.setWebApplicationType(WebApplicationType.NONE);
@@ -41,7 +43,7 @@ public class TweetsCountApplication implements CommandLineRunner {
         builder
                 .stream(Pattern.compile(PATTERN_REGX), Consumed.with(Serdes.String(), Serdes.String()))
                 .transform(() -> new TweetsCountTransformer(tweetCountStateStore), tweetCountStateStore)
-                .to("tweets_count_topic", Produced.with(Serdes.Long(), Serdes.Long()));
+                .to(TWEETS_COUNT, Produced.with(Serdes.Long(), Serdes.Long()));
 
         var topology = builder.build();
         new KafkaStreams(topology, props()).start();
@@ -49,7 +51,7 @@ public class TweetsCountApplication implements CommandLineRunner {
 
     private Properties props() {
         Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "tweet-counts-0");
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "tweet-counts");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
 
