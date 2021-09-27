@@ -40,4 +40,10 @@ public class Tweet implements WithSender {
     public void setTimeline(Long timeline) {
         this.timeline = timeline;
     }
+
+    @Override
+    public String toString() {
+        return String.format("id=%d,send=%d,content=%s,timeline=%s",
+                id, sender, content, timeline);
+    }
 }
