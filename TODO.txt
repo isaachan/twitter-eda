@@ -1,2 +1,4 @@
 DONE - [tweet] Refine Event Scheme to support significant semantic - create and delete.
 DONE - [tweet] TweetEvent, userid as event key.
+- Externalize configuration
+- Unit Test

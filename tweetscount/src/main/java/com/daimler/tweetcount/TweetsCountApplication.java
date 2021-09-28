@@ -17,6 +17,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
@@ -28,7 +30,8 @@ public class TweetsCountApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TweetsCountApplication.class);
-        app.setWebApplicationType(WebApplicationType.NONE);
+        app.setDefaultProperties(Collections.singletonMap("server.port", "8083"));
+//        app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
     }
 
