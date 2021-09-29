@@ -2,3 +2,4 @@ DONE - [tweet] Refine Event Scheme to support significant semantic - create and 
 DONE - [tweet] TweetEvent, userid as event key.
 - Externalize configuration
 - Unit Test
+- UserNotFoundException

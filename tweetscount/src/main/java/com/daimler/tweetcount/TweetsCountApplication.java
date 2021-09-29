@@ -5,19 +5,13 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.Produced;
-import org.apache.kafka.streams.state.KeyValueBytesStoreSupplier;
-import org.apache.kafka.streams.state.KeyValueStore;
-import org.apache.kafka.streams.state.StoreBuilder;
 import org.apache.kafka.streams.state.Stores;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -27,25 +21,25 @@ public class TweetsCountApplication implements CommandLineRunner {
 
     static String PATTERN_REGX = "tweets_topic|retweets_topic";
     public final static String TWEETS_COUNT = "tweets_count";
+    public final static String TWEET_COUNT_STATE_STORE = "tweetCountStateStore";
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(TweetsCountApplication.class);
         app.setDefaultProperties(Collections.singletonMap("server.port", "8083"));
-//        app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
     }
 
     @Override
     public void run(String... args) throws Exception {
         var builder = new StreamsBuilder();
-        var tweetCountStateStore = "tweetCountStateStore";
-        var storeSupplier = Stores.inMemoryKeyValueStore(tweetCountStateStore);
+
+        var storeSupplier = Stores.inMemoryKeyValueStore(TWEET_COUNT_STATE_STORE);
         var storeBuilder = Stores.keyValueStoreBuilder(storeSupplier, Serdes.Long(), Serdes.Long());
         builder.addStateStore(storeBuilder);
 
         builder
                 .stream(Pattern.compile(PATTERN_REGX), Consumed.with(Serdes.String(), Serdes.String()))
-                .transform(() -> new TweetsCountTransformer(tweetCountStateStore), tweetCountStateStore)
+                .transform(() -> new TweetsCountTransformer(TWEET_COUNT_STATE_STORE), TWEET_COUNT_STATE_STORE)
                 .to(TWEETS_COUNT, Produced.with(Serdes.Long(), Serdes.Long()));
 
         var topology = builder.build();
