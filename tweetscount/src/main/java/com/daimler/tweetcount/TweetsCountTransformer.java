@@ -35,10 +35,10 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
 
     private Long update(Tweet tweet, Long count) {
         if (tweet.getAction().equals("create_action")) {
-            return count++;
+            return count + 1;
         }
         else if (tweet.getAction().equals("delete_action")) {
-            return count--;
+            return count - 1;
         }
         throw new RuntimeException();
     }
