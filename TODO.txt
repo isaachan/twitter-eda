@@ -3,3 +3,4 @@ DONE - [tweet] TweetEvent, userid as event key.
 - Externalize configuration
 - Unit Test
 - UserNotFoundException
+- [tweet-count] Transformer.transform(): Key is sender, no need to extract from rebuild event object.

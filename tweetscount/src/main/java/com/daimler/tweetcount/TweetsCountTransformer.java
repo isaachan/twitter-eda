@@ -9,7 +9,6 @@ import org.apache.kafka.streams.state.KeyValueStore;
 public class TweetsCountTransformer implements Transformer<String, String, KeyValue<Long, Long>> {
 
     private String storeName;
-    private ProcessorContext context;
     private KeyValueStore<Long, Long> stateStore;
 
     public TweetsCountTransformer(String storeName) {
@@ -18,8 +17,7 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
 
     @Override
     public void init(ProcessorContext context) {
-        this.context = context;
-        this.stateStore = this.context.getStateStore(storeName);
+        this.stateStore = context.getStateStore(storeName);
     }
 
     @Override
