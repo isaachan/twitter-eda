@@ -45,18 +45,20 @@ public class TweetController {
 
 
     private String convertCreateEvent(WithSender tweet) {
-        return convertToJson(new Event(Event.CREATE, tweet));
+        return new Event(Event.CREATE, tweet).toJson();
+//        return convertToJson(new Event(Event.CREATE, tweet));
     }
 
     private String convertDeleteEvent(WithSender tweet) {
-        return convertToJson(new Event(Event.DELETE, tweet));
+        return new Event(Event.DELETE, tweet).toJson();
+//        return convertToJson(new Event(Event.DELETE, tweet));
     }
 
-    private String convertToJson(Object object) {
-        try {
-            return new ObjectMapper().writeValueAsString(object);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    private String convertToJson(Object object) {
+//        try {
+//            return new ObjectMapper().writeValueAsString(object);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

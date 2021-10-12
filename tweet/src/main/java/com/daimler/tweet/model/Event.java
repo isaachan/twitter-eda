@@ -1,5 +1,7 @@
 package com.daimler.tweet.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Event<T extends WithSender> {
 
     public static final String CREATE = "create_action";
@@ -32,5 +34,13 @@ public class Event<T extends WithSender> {
 
     public Long getSender() {
         return content.getSender();
+    }
+
+    public String toJson() {
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
