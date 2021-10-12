@@ -25,15 +25,8 @@ public class Timeline {
     }
 
     private void doMerge(String value) throws JsonProcessingException {
-        var rawData = new ObjectMapper().readValue(value, HashMap.class);
-        var content = (HashMap) rawData.get("content");
-        var tweet = new Tweet();
-        tweet.setSender(Long.valueOf((int) rawData.get("sender")));
-        tweet.setTimeline((long) content.get("timeline"));
-        tweet.setContent((String) content.get("content"));
-
         var tweetsOfDay = new ArrayList<Tweet>();
-        tweetsOfDay.add(tweet);
+        tweetsOfDay.add(Tweet.build(value));
         timeline.put("2021-10-12", tweetsOfDay);
     }
 
