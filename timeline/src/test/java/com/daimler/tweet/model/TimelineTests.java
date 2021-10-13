@@ -41,5 +41,6 @@ public class TimelineTests {
         assertEquals(2, timeline.get("2021-10-12").size());
         assertEquals(1, timeline.get("2021-10-13").size());
 
+        assertEquals(0, timeline.get("1970-01-01").size());
     }
 }

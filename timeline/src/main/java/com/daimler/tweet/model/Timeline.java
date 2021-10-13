@@ -36,6 +36,6 @@ public class Timeline {
     }
 
     public List<com.daimler.tweet.model.Tweet> get(String date) {
-        return timeline.get(date);
+        return timeline.getOrDefault(date, new ArrayList<>());
     }
 }
