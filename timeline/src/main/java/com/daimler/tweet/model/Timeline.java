@@ -21,11 +21,14 @@ public class Timeline {
     public void merge(String value) {
         var tweet = Tweet.build(value);
         String key = parseTimeOfTweet(tweet);
-
         var tweetsOfDay = timeline.getOrDefault(key, new ArrayList<>());
 
-        tweetsOfDay.add(tweet);
-        timeline.put(key, tweetsOfDay);
+        if (tweet.getAction().equals(Tweet.CREATE)) {
+            tweetsOfDay.add(tweet);
+            timeline.put(key, tweetsOfDay);
+        } else if (tweet.getAction().equals(Tweet.DELETE)) {
+            tweetsOfDay.removeIf(t -> t.getId().equals(tweet.getId()));
+        }
     }
 
     private String parseTimeOfTweet(Tweet tweet) {
