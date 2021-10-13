@@ -19,10 +19,12 @@ public class Timeline {
     }
 
     public void merge(String value) {
-        var tweetsOfDay = new ArrayList<Tweet>();
         var tweet = Tweet.build(value);
-        tweetsOfDay.add(tweet);
         String key = parseTimeOfTweet(tweet);
+
+        var tweetsOfDay = timeline.getOrDefault(key, new ArrayList<>());
+
+        tweetsOfDay.add(tweet);
         timeline.put(key, tweetsOfDay);
     }
 
