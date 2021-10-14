@@ -18,6 +18,7 @@ public class Timeline {
         this.sender = sender;
     }
 
+
     public void merge(String value) {
         var tweet = Tweet.build(value);
         String key = parseTimeOfTweet(tweet);
@@ -40,5 +41,27 @@ public class Timeline {
 
     public List<Tweet> get(String date) {
         return timeline.getOrDefault(date, new ArrayList<>());
+    }
+
+
+    /*
+     *  Below methods are for serilization/deserilization to work.
+     */
+    public Timeline() {}
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public Map<String, List<Tweet>> getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(Map<String, List<Tweet>> timeline) {
+        this.timeline = timeline;
     }
 }
