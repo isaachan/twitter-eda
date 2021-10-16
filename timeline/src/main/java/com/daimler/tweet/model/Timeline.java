@@ -19,7 +19,6 @@ public class Timeline {
         this.sender = sender;
     }
 
-
     public void merge(String value) {
         var tweet = Tweet.build(value);
         String key = parseTimeOfTweet(tweet);
@@ -44,7 +43,19 @@ public class Timeline {
         return timeline.getOrDefault(date, new ArrayList<>());
     }
 
+    public Map<String, List<Tweet>> findBetween(String from, String to) {
+        var selected = new HashMap<String, List<Tweet>>();
+        for (var entry : timeline.entrySet()) {
+            if (dateInbetwee(from, to, entry.getKey())) {
+                selected.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return selected;
+    }
 
+    private boolean dateInbetwee(String from, String to, String date) {
+        return date.compareTo(from) >= 0 && date.compareTo(to) <= 0;
+    }
 
     /*
      *  Below methods are for serilization/deserilization to work.
@@ -67,17 +78,4 @@ public class Timeline {
         this.timeline = timeline;
     }
 
-    public Map<String, List<Tweet>> findBetween(String from, String to) {
-        var selected = new HashMap<String, List<Tweet>>();
-        for (var entry : timeline.entrySet()) {
-            if (dateInbetwee(from, to, entry.getKey())) {
-                selected.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return selected;
-    }
-
-    private boolean dateInbetwee(String from, String to, String date) {
-        return date.compareTo(from) >= 0 && date.compareTo(to) <= 0;
-    }
 }
