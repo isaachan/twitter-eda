@@ -1,4 +1,4 @@
-package com.daimler.tweetcount;
+package com.daimler.tweetcount.model;
 
 public class UserNotFoundException extends RuntimeException {
 
