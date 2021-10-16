@@ -25,20 +25,11 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
         var tweet = Tweet.build(jsonValue);
         var sender = tweet.getSender();
         var count = stateStore.get(sender);
-        if (count == null) { count = 0L; }
-        count = update(tweet, count);
-        stateStore.put(sender, count);
-        return new KeyValue<>(sender, count);
-    }
+        var tweetsCount = new TweetsCount(sender, count);
+        tweetsCount.updateCount(tweet);
 
-    private Long update(Tweet tweet, Long count) {
-        if (tweet.getAction().equals("create_action")) {
-            return count + 1;
-        }
-        else if (tweet.getAction().equals("delete_action")) {
-            return count - 1;
-        }
-        throw new RuntimeException();
+        stateStore.put(tweetsCount.getSender(), tweetsCount.getCount());
+        return new KeyValue<>(sender, count);
     }
 
     @Override

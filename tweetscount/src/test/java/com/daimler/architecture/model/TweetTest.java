@@ -8,7 +8,7 @@ public class TweetTest {
     @Test
     public void buildTweetFromJson() {
 
-        var tweet = Tweet.build("");
+        //var tweet = Tweet.build("");
 
     }
 }
