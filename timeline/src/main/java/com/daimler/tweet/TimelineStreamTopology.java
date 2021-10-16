@@ -17,7 +17,7 @@ public class TimelineStreamTopology {
     public static final String TIMELINE_STATE_STORE = "timelineStateStore";
     static String PATTERN_REGX = "tweets_topic|retweets_topic";
 
-    public Topology build() {
+    public static Topology build() {
         var builder = new StreamsBuilder();
         var storeSupplier = Stores.inMemoryKeyValueStore(TIMELINE_STATE_STORE);
         var storeBuilder = Stores.keyValueStoreBuilder(storeSupplier, Serdes.Long(), TimelineSerdes.build());
