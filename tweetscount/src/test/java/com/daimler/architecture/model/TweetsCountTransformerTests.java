@@ -50,11 +50,11 @@ public class TweetsCountTransformerTests {
         var transformer = new TweetsCountTransformer(STORE_NAME);
         transformer.init(processorContext);
 
-        assertTransformerResult(1L, 1L, transformer.transform("1000", create_event_1000_by_sender1));
-        assertTransformerResult(1L, 0L, transformer.transform("1000", delete_event_1000_by_sender1));
-        assertTransformerResult(2L, 1L, transformer.transform("1000", create_event_1001_by_sender2));
-        assertTransformerResult(2L, 2L, transformer.transform("1000", create_event_1002_by_sender2));
-        assertTransformerResult(2L, 3L, transformer.transform("1000", create_event_1003_by_sender2));
+        assertTransformerResult(1L, 1L, transformer.transform("1", create_event_1000_by_sender1));
+        assertTransformerResult(1L, 0L, transformer.transform("1", delete_event_1000_by_sender1));
+        assertTransformerResult(2L, 1L, transformer.transform("2", create_event_1001_by_sender2));
+        assertTransformerResult(2L, 2L, transformer.transform("2", create_event_1002_by_sender2));
+        assertTransformerResult(2L, 3L, transformer.transform("2", create_event_1003_by_sender2));
     }
 
     private static void assertTransformerResult(Long expectedSender, Long expectedCount, KeyValue<Long, Long> kv) {

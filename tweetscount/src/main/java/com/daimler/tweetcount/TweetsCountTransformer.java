@@ -22,18 +22,23 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
 
     @Override
     public KeyValue<Long, Long> transform(String key, String jsonValue) {
-        var tweet = Tweet.build(jsonValue);
-        var sender = tweet.getSender();
-        var count = stateStore.get(sender);
-        var tweetsCount = new TweetsCount(sender, count);
-        tweetsCount.updateCount(tweet);
+        var sender = Long.parseLong(key);
+        var count = updateCount(stateStore.get(sender), Tweet.build(jsonValue));
+        stateStore.put(sender, count);
+        return new KeyValue<>(sender, count);
+    }
 
-        stateStore.put(tweetsCount.getSender(), tweetsCount.getCount());
-        return new KeyValue<>(tweetsCount.getSender(), tweetsCount.getCount());
+    public long updateCount(Long current, Tweet tweet) {
+        long result = current == null ? 0:current;
+        if (tweet.getAction().equals("create_action")) {
+            return result + 1;
+        }
+        else if (tweet.getAction().equals("delete_action")) {
+            return result - 1;
+        }
+        throw new RuntimeException("Unknown Action: " + tweet.getAction());
     }
 
     @Override
-    public void close() {
-
-    }
+    public void close() { }
 }
