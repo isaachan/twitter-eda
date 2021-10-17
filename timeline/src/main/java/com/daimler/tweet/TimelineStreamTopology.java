@@ -1,13 +1,10 @@
 package com.daimler.tweet;
 
-import com.daimler.tweet.model.Timeline;
 import com.daimler.tweet.model.TimelineSerdes;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.Consumed;
-import org.apache.kafka.streams.kstream.ValueTransformerWithKeySupplier;
 import org.apache.kafka.streams.state.Stores;
 
 import java.util.regex.Pattern;
