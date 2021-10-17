@@ -27,7 +27,7 @@ public class TweetsCount {
         else if (tweet.getAction().equals("delete_action")) {
             this.count--;
         }
-        throw new RuntimeException();
+        return;
     }
 }
 

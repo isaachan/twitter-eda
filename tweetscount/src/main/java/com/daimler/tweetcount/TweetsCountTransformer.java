@@ -29,7 +29,7 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
         tweetsCount.updateCount(tweet);
 
         stateStore.put(tweetsCount.getSender(), tweetsCount.getCount());
-        return new KeyValue<>(sender, count);
+        return new KeyValue<>(tweetsCount.getSender(), tweetsCount.getCount());
     }
 
     @Override
