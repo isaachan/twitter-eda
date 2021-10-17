@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import java.util.Properties;
 
 @Configuration
-public class TweetConfiguration {
+public class AppConfig {
 
     private final Serializer<String> stringSerdes = Serdes.String().serializer();
 
