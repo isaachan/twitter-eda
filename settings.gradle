@@ -3,4 +3,5 @@ include 'user'
 include 'tweet'
 include 'timeline'
 include 'tweetscount'
+include 'homepage'
 
