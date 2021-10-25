@@ -4,3 +4,4 @@ DONE - [tweet] TweetEvent, userid as event key.
 - Unit Test
 - UserNotFoundException
 - [tweet-count] Transformer.transform(): Key is sender, no need to extract from rebuild event object.
+- Remove PATTERN_REGX, replace with Arrays.asList()

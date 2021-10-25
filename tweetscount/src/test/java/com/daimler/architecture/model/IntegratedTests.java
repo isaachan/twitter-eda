@@ -41,13 +41,14 @@ public class IntegratedTests {
 
     @Test
     public void should_increase_count_when_create_tweets() {
-//        tweetInputTopic.pipeInput("1", create_event_1000_by_sender1);
-//        System.out.println("========================"+ testDriver);
-//        System.out.println(testDriver.getStateStore("tweetCountStateStore"));
-//        System.out.println();
+        tweetInputTopic.pipeInput("1", create_event_1000_by_sender1);
+        tweetInputTopic.pipeInput("2", create_event_1001_by_sender2);
+        tweetInputTopic.pipeInput("2", create_event_1002_by_sender2);
+        tweetInputTopic.pipeInput("2", create_event_1003_by_sender2);
 
-//        var stateStore = testDriver.getKeyValueStore("tweetCountStateStore");
-//        assertEquals(1, stateStore.get("1"));
+        var stateStore = testDriver.getKeyValueStore("tweetCountStateStore");
+        assertEquals(1L, stateStore.get(1L));
+        assertEquals(3L, stateStore.get(2L));
     }
 
     @AfterEach
