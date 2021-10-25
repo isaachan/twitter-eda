@@ -19,8 +19,6 @@ import java.util.regex.Pattern;
 @SpringBootApplication
 public class TweetsCountApplication {
 
-    static String PATTERN_REGX = "tweets_topic|retweets_topic";
-    public final static String TWEETS_COUNT = "tweets_count";
     public final static String TWEET_COUNT_STATE_STORE = "tweetCountStateStore";
 
     public static void main(String[] args) {
