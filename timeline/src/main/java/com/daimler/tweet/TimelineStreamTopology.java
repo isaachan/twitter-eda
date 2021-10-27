@@ -8,7 +8,6 @@ import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.state.Stores;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class TimelineStreamTopology {
 
