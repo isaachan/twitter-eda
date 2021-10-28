@@ -17,6 +17,7 @@ public class TweetsCountStreamTopology {
     static final String[] INPUT_TOPICS = {"tweets_topic", "retweets_topic"};
     public final static String TWEETS_COUNT = "tweets_count";
     public final static String TWEET_COUNT_STATE_STORE = "tweetCountStateStore";
+    public static final String USERS_TOPIC = "users_topic";
 
     public static Topology build() {
         var builder = new StreamsBuilder();
@@ -29,6 +30,10 @@ public class TweetsCountStreamTopology {
                 .stream(Arrays.asList(INPUT_TOPICS), Consumed.with(Serdes.String(), Serdes.String()))
                 .transform(() -> new TweetsCountTransformer(TWEET_COUNT_STATE_STORE), TWEET_COUNT_STATE_STORE)
                 .to(TWEETS_COUNT, Produced.with(Serdes.Long(), Serdes.Long()));
+
+        builder
+                .stream(USERS_TOPIC, Consumed.with(Serdes.String(), Serdes.String()))
+                .transform(() -> new UserUpdater(TWEET_COUNT_STATE_STORE), TWEET_COUNT_STATE_STORE);
 
         return builder.build();
     }

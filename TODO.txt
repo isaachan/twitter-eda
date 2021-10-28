@@ -1,7 +1,10 @@
-DONE - [tweet] Refine Event Scheme to support significant semantic - create and delete.
-DONE - [tweet] TweetEvent, userid as event key.
+[DONE] - <tweet> Refine Event Scheme to support significant semantic - create and delete.
+[DONE] - <tweet> TweetEvent, userid as event key.
+[DONE] - UserNotFoundException
+[DONE] - Remove PATTERN_REGX, replace with Arrays.asList()
 - Externalize configuration
-- Unit Test
-- UserNotFoundException
-- [tweet-count] Transformer.transform(): Key is sender, no need to extract from rebuild event object.
-DONE - Remove PATTERN_REGX, replace with Arrays.asList()
+- Unit Test coverage over 90%.
+- <tweet-count> Transformer.transform(): Key is sender, no need to extract from rebuild event object.
+- <tweetcount> Listen to 'user' topic and create store when new user created.
+- <tweet> fetch all tweets by user
+- <timeline> Tweets of day should be stored in PriorityQueue instead of ArrayList.

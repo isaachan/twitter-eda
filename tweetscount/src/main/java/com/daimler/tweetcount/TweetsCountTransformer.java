@@ -1,6 +1,7 @@
 package com.daimler.tweetcount;
 
 import com.daimler.tweetcount.model.Tweet;
+import com.daimler.tweetcount.model.UserNotFoundException;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
@@ -23,17 +24,18 @@ public class TweetsCountTransformer implements Transformer<String, String, KeyVa
     @Override
     public KeyValue<Long, Long> transform(String key, String jsonValue) {
         var sender = Long.parseLong(key);
-        var count = updateCount(stateStore.get(sender), Tweet.build(jsonValue));
+        Long result = stateStore.get(sender);
+        if (result == null) throw new UserNotFoundException(sender);
+
+        var count = updateCount(result, Tweet.build(jsonValue));
         stateStore.put(sender, count);
         return new KeyValue<>(sender, count);
     }
 
-    public long updateCount(Long current, Tweet tweet) {
-        long result = current == null ? 0:current;
+    public long updateCount(Long result, Tweet tweet) {
         if (tweet.getAction().equals("create_action")) {
             return result + 1;
-        }
-        else if (tweet.getAction().equals("delete_action")) {
+        } else if (tweet.getAction().equals("delete_action")) {
             return result - 1;
         }
         throw new RuntimeException("Unknown Action: " + tweet.getAction());

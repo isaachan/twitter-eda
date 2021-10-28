@@ -7,6 +7,7 @@ import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 
 import java.io.IOException;
+import java.util.PriorityQueue;
 
 public class TimelineSerdes {
 
@@ -38,4 +39,5 @@ public class TimelineSerdes {
             }
         };
     }
+
 }

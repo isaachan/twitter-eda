@@ -43,6 +43,8 @@ public class TweetController {
         kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(retweet.getSender()), convertDeleteEvent(retweet)));
     }
 
+
+
     private String convertCreateEvent(WithSender tweet) {
         return new Event(Event.CREATE, tweet).toJson();
     }
