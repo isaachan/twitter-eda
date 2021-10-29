@@ -2,10 +2,12 @@ package com.daimler.tweetcount;
 
 import com.daimler.tweetcount.model.Tweet;
 import com.daimler.tweetcount.model.UserNotFoundException;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.state.KeyValueStore;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TweetsCountTransformer implements Transformer<String, String, KeyValue<Long, Long>> {
 

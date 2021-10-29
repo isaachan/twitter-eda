@@ -10,6 +10,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.PriorityQueue;
+
 @RestController
 public class TweetController {
 
@@ -43,7 +45,15 @@ public class TweetController {
         kafkaProducer.send(new ProducerRecord<>(RETWEETS_TOPIC, String.valueOf(retweet.getSender()), convertDeleteEvent(retweet)));
     }
 
-
+    /**
+     * Return all tweets and retweets from user with given userid.
+     * @param userid
+     * @return
+     */
+    @GetMapping("/users/{userid}/content")
+    public PriorityQueue<Tweet> tweetsContent(@PathVariable long userid) {
+        return null;
+    }
 
     private String convertCreateEvent(WithSender tweet) {
         return new Event(Event.CREATE, tweet).toJson();
